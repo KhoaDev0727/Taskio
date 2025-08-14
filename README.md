@@ -113,3 +113,6 @@ To provide an **efficient** and **customizable** work management solution that e
 This project is licensed under the **MIT License**.
 
 ---
+
+## 👨‍💻 Author
+Developed by **Le Minh Khoa** (*KhoaDev0727*).
