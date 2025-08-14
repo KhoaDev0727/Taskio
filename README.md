@@ -1,65 +1,115 @@
-SaaS Multi-Organization Work Management
-📋 Overview
-This project is a Software as a Service (SaaS) application designed for task and project management across multiple organizations (tenants). It provides a scalable, secure, and user-friendly platform to streamline collaborative workflows, inspired by tools like Trello or Asana. Built with a multi-tenant architecture, it ensures data isolation for each organization while running on a single codebase.
-🎯 Purpose
-The goal is to offer an efficient and customizable work management solution for teams and organizations to:
+# 🚀 SaaS Multi-Organization Work Management
 
-Organize tasks and projects.
-Track progress, priorities, and deadlines.
-Facilitate team collaboration through comments, checklists, and file attachments.
-Support multiple organizations with isolated data and flexible subscription plans.
+> A modern **multi-tenant SaaS platform** for task and project management — inspired by Jira, Trello, and Asana.
 
-👥 Target Audience
+---
 
-Small and Medium Businesses (SMBs): Startups, agencies, or small companies needing cost-effective task management.
-Freelance and Remote Teams: For managing client projects or remote collaboration.
-Large Organizations: With multiple departments requiring isolated project management.
-Individual Users: For personal task management with a free plan.
-SaaS Developers: Looking to customize or resell a work management solution.
+## 📋 Overview
 
-✨ Key Features
+This project is a **Software as a Service (SaaS)** application for managing **tasks and projects** across multiple organizations (**tenants**).  
+It delivers a **scalable**, **secure**, and **user-friendly** platform to streamline collaborative workflows, with **data isolation per tenant** while running on a single codebase.
 
-Multi-Tenant Architecture: Each organization (tenant) has isolated data with unique slugs.
-User Management: Supports user roles (OWNER, ADMIN, MEMBER, VIEWER) with JWT-based authentication and refresh tokens.
-Project Management: Create and manage projects with unique keys, names, and descriptions.
-Task Management: Tasks with titles, descriptions, assignees, reporters, status (todo/in_progress/done), priorities, due dates, and time estimates.
-Collaboration Tools:
-Labels: Categorize tasks with colored labels.
-Comments: Discuss tasks with mentions (JSONB support).
-Attachments: Store file metadata (e.g., S3 URLs).
-Checklists: Create and track checklist items within tasks.
+---
 
+## 🎯 Purpose
 
-Teams: Group users within a tenant for collaboration.
-Search: Full-text search for tasks using PostgreSQL GIN index.
-Audit and Soft Delete: Tracks creation/update timestamps and soft deletes for data recovery.
+To provide an **efficient** and **customizable** work management solution that enables teams and organizations to:
 
-🛠️ Technical Stack
+- 📌 **Organize** tasks and projects efficiently.  
+- 📊 **Track** progress, priorities, and deadlines.  
+- 💬 **Collaborate** via comments, checklists, and file attachments.  
+- 🏢 **Support multiple organizations** with isolated data and flexible subscription plans.
 
-Backend: Java Spring Boot with JPA/Hibernate.
-Database: PostgreSQL with extensions (pgcrypto for UUIDs, btree_gin for indexing).
-Security: JWT authentication, password hashing, refresh tokens.
-Entities: Tenant, User, Role, UserRole, Project, Task, Label, TaskLabel, Comment, Attachment, Checklist, ChecklistItem, Team.
-Features:
-Multi-tenant data isolation via tenant_id.
-Unique constraints for tenant-specific data (e.g., project key/name).
-Database triggers for automatic updated_at timestamps.
-Indexes for performance optimization.
+---
 
+## 👥 Target Audience
 
+- **Small & Medium Businesses (SMBs)** — Startups, agencies, small companies needing cost-effective solutions.  
+- **Freelance & Remote Teams** — Managing client projects and distributed workflows.  
+- **Large Organizations** — Multiple departments with isolated project spaces.  
+- **Individual Users** — Personal task management with a free plan.  
+- **SaaS Developers** — Looking to customize or white-label a work management platform.
 
-🚀 Getting Started
+---
 
-Setup Database: Initialize PostgreSQL with the provided schema (includes tables, constraints, and triggers).
-Configure Backend: Set up Spring Boot with dependencies for JPA, security, and JWT.
-Seed Data: Populate the roles table with roles (e.g., OWNER, ADMIN).
-Run Application: Use AuthService for user registration, login, and token refresh.
-Extend: Add REST API controllers and a frontend (e.g., React) for a complete solution.
+## ✨ Key Features
 
-🔮 Future Enhancements
+### 🏢 Multi-Tenant Architecture
+- Isolated data for each organization via **tenant_id**.
+- Unique slugs for tenant identification.
 
-REST API endpoints for task/project management.
-Frontend interface for user interaction.
-Integration with cloud storage (e.g., S3) for attachments.
-Billing system for subscription plans.
-Notification and reporting features.
+### 👤 User Management
+- Roles: **OWNER**, **ADMIN**, **MEMBER**, **VIEWER**.
+- JWT-based authentication + refresh tokens.
+
+### 📂 Project Management
+- Create/manage projects with unique **keys**, **names**, and **descriptions**.
+
+### ✅ Task Management
+- Title, description, assignee, reporter, status (**todo / in_progress / done**), priority, due date, time estimate.
+
+### 🤝 Collaboration Tools
+- **Labels** — Categorize tasks with colors.
+- **Comments** — Mention users (JSONB support).
+- **Attachments** — Store file metadata (e.g., S3 URLs).
+- **Checklists** — Track subtasks inside tasks.
+
+### 👥 Teams
+- Group users within a tenant for collaboration.
+
+### 🔍 Search & Data Management
+- Full-text search via PostgreSQL **GIN** index.
+- Audit fields + soft delete for data recovery.
+
+---
+
+## 🛠 Technical Stack
+
+| Layer          | Technology |
+|----------------|------------|
+| **Backend**    | Java Spring Boot (JPA/Hibernate) |
+| **Database**   | PostgreSQL (+ `pgcrypto`, `btree_gin`) |
+| **Security**   | JWT Auth, password hashing, refresh tokens |
+| **Entities**   | Tenant, User, Role, UserRole, Project, Task, Label, TaskLabel, Comment, Attachment, Checklist, ChecklistItem, Team |
+
+**Features:**
+- Multi-tenant isolation (`tenant_id`).
+- Unique constraints per tenant (project key/name).
+- DB triggers for `updated_at`.
+- Performance indexes.
+
+---
+
+## 🚀 Getting Started
+
+1. **Setup Database**  
+   - Initialize PostgreSQL with the provided schema (tables, constraints, triggers).
+
+2. **Configure Backend**  
+   - Add Spring Boot dependencies for JPA, Security, JWT.
+
+3. **Seed Data**  
+   - Populate `roles` table with: OWNER, ADMIN, MEMBER, VIEWER.
+
+4. **Run Application**  
+   - Use `AuthService` for register/login/refresh token.
+
+5. **Extend**  
+   - Add REST APIs + React frontend for full functionality.
+
+---
+
+## 🔮 Future Enhancements
+
+- 🌐 REST APIs for task/project management.  
+- 💻 Modern React UI.  
+- ☁ Cloud storage integration (e.g., S3) for attachments.  
+- 💳 Subscription billing system.  
+- 🔔 Real-time notifications + reporting.
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.
+
+---
