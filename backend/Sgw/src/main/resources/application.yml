@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: sgw-backend
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:sgw}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:KhoaIOS1*}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update          # dùng validate cho dev; đổi sang none/update tùy nhu cầu
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc.time_zone: UTC
+    open-in-view: false
+
+  flyway:
+    enabled: false                # bạn chưa dùng Flyway => tắt để tránh lỗi lúc boot
+    # locations: classpath:db/migration
+
+  data:
+    redis:
+      repositories:
+        enabled: false            # chưa dùng Redis repo => tắt cảnh báo
+
+server:
+  port: ${APP_PORT:8080}
+  servlet:
+    context-path: /
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: WARN
+    # com.zaxxer.hikari: DEBUG    # bật dòng này khi cần kiểm tra JDBC url/credential
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSX} [%thread] %-5level %logger - %msg%n"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+logging:
+  level:
+    com.saas.workmgmt: DEBUG
+    org.springframework.security: INFO
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+logging:
+  level:
+    root: INFO
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+---
+app:
+  jwt:
+    secret: T5Hg3xrCo1pxmQr/Scx8sbC6E7I1C/m2fAc/jkgn8VI=
+    access-ttl-ms: 3600000   # 1 giờ
