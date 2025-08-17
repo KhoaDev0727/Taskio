@@ -29,7 +29,12 @@ public class User extends BaseAuditable {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
+    @Builder.Default
+    @Column(nullable = false)
     private String timezone = "UTC";
+
+    @Builder.Default
+    @Column(nullable = false)
     private String locale = "vi";
 
     @Column(length = 16)
