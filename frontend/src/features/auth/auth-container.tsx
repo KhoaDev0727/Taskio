@@ -1,11 +1,13 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import LoginForm from "./login-form"
 import RegisterForm from "./register-form"
 
 export default function AuthContainer() {
   const [isLogin, setIsLogin] = useState(true)
+  const router = useRouter()
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -150,9 +152,9 @@ export default function AuthContainer() {
             <div className="w-full max-w-md">
               <div className="bg-white/20 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/30 p-8 auth-slide-in">
                 {isLogin ? (
-                  <LoginForm onSwitchToRegister={() => setIsLogin(false)} />
+                  <LoginForm onSwitchToRegister={() => setIsLogin(false)} router={router} />
                 ) : (
-                  <RegisterForm onSwitchToLogin={() => setIsLogin(true)} />
+                  <RegisterForm onSwitchToLogin={() => setIsLogin(true)} router={router} />
                 )}
               </div>
 

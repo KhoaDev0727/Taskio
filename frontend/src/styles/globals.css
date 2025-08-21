@@ -1,42 +1,43 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --foreground: oklch(0.35 0 0);
+  --card: oklch(0.98 0 0);
+  --card-foreground: oklch(0.25 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.35 0 0);
+  /* Changed primary colors from green to blue */
+  --primary: oklch(0.45 0.15 240);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.55 0.12 240);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.98 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.55 0.12 240);
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.99 0 0);
+  --ring: oklch(0.45 0.15 240 / 0.5);
+  --chart-1: oklch(0.45 0.15 240);
+  --chart-2: oklch(0.55 0.12 240);
+  --chart-3: oklch(0.6 0.15 220);
+  --chart-4: oklch(0.45 0 0);
+  --chart-5: oklch(0.577 0.245 27.325);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.99 0 0);
+  --sidebar-foreground: oklch(0.35 0 0);
+  --sidebar-primary: oklch(1 0 0);
+  --sidebar-primary-foreground: oklch(0.45 0.15 240);
+  --sidebar-accent: oklch(0.55 0.12 240);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.45 0.15 240 / 0.5);
 }
 
 .dark {
@@ -46,8 +47,9 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  /* Updated dark mode colors to blue theme */
+  --primary: oklch(0.55 0.12 240);
+  --primary-foreground: oklch(0.145 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -59,14 +61,14 @@
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
   --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-1: oklch(0.488 0.243 240);
+  --chart-2: oklch(0.696 0.17 220);
+  --chart-3: oklch(0.769 0.188 200);
+  --chart-4: oklch(0.627 0.265 260);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary: oklch(0.488 0.243 240);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
@@ -119,5 +121,585 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Enhanced auth animations and background effects */
+  .auth-slide-in {
+    animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .auth-fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+
+  /* Updated gradient background to transition from blue to lighter blue tones, removing white */
+  .gradient-bg {
+    background: linear-gradient(
+      135deg,
+	  #0f172a 0%,
+	  #1e293b 15%,
+	  #1e40af 30%,
+	  #3b82f6 45%,
+	  #60a5fa 60%,
+	  #4a89d1 75%,
+	  #356fb6 90%,
+	  #7186ff 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  /* Added many more floating decorative elements */
+  .bg-decoration {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .bg-decoration-1 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+    top: 5%;
+    left: -15%;
+    animation-delay: 0s;
+  }
+
+  .bg-decoration-2 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(147, 197, 253, 0.3) 0%, transparent 70%);
+    top: 55%;
+    right: -10%;
+    animation-delay: 2s;
+  }
+
+  .bg-decoration-3 {
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(219, 234, 254, 0.35) 0%, transparent 70%);
+    bottom: 15%;
+    left: 15%;
+    animation-delay: 4s;
+  }
+
+  .bg-decoration-4 {
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.25) 0%, transparent 70%);
+    top: 25%;
+    right: 10%;
+    animation-delay: 1s;
+  }
+
+  .bg-decoration-5 {
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(30, 64, 175, 0.3) 0%, transparent 70%);
+    bottom: 35%;
+    right: 25%;
+    animation-delay: 3s;
+  }
+
+  .bg-decoration-6 {
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(147, 197, 253, 0.4) 0%, transparent 70%);
+    top: 65%;
+    left: 5%;
+    animation-delay: 5s;
+  }
+
+  .bg-decoration-7 {
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+    top: 40%;
+    left: 70%;
+    animation-delay: 1.5s;
+  }
+
+  .bg-decoration-8 {
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.3) 0%, transparent 70%);
+    bottom: 60%;
+    left: 40%;
+    animation-delay: 3.5s;
+  }
+
+  .bg-decoration-9 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(30, 64, 175, 0.15) 0%, transparent 70%);
+    top: 10%;
+    right: 50%;
+    animation-delay: 2.5s;
+  }
+
+  .bg-decoration-10 {
+    width: 110px;
+    height: 110px;
+    background: radial-gradient(circle, rgba(147, 197, 253, 0.25) 0%, transparent 70%);
+    bottom: 10%;
+    right: 60%;
+    animation-delay: 4.5s;
+  }
+
+  .bg-decoration-11 {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(219, 234, 254, 0.4) 0%, transparent 70%);
+    top: 75%;
+    right: 5%;
+    animation-delay: 0.5s;
+  }
+
+  .bg-decoration-12 {
+    width: 130px;
+    height: 130px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+    top: 50%;
+    left: 25%;
+    animation-delay: 6s;
+  }
+
+  .bg-decoration-13 {
+    width: 170px;
+    height: 170px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%);
+    bottom: 50%;
+    right: 40%;
+    animation-delay: 1.8s;
+  }
+
+  .bg-decoration-14 {
+    width: 95px;
+    height: 95px;
+    background: radial-gradient(circle, rgba(30, 64, 175, 0.35) 0%, transparent 70%);
+    top: 85%;
+    left: 60%;
+    animation-delay: 3.2s;
+  }
+
+  .bg-decoration-15 {
+    width: 75px;
+    height: 75px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+    top: 15%;
+    left: 45%;
+    animation-delay: 4.8s;
+  }
+
+  .bg-decoration-16 {
+    width: 185px;
+    height: 185px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.15) 0%, transparent 70%);
+    bottom: 40%;
+    left: 70%;
+    animation-delay: 2.2s;
+  }
+
+  .bg-decoration-17 {
+    width: 65px;
+    height: 65px;
+    background: radial-gradient(circle, rgba(147, 197, 253, 0.3) 0%, transparent 70%);
+    top: 55%;
+    right: 80%;
+    animation-delay: 5.5s;
+  }
+
+  .bg-decoration-18 {
+    width: 145px;
+    height: 145px;
+    background: radial-gradient(circle, rgba(30, 64, 175, 0.18) 0%, transparent 70%);
+    bottom: 70%;
+    right: 20%;
+    animation-delay: 1.2s;
+  }
+
+  .bg-decoration-19 {
+    width: 105px;
+    height: 105px;
+    background: radial-gradient(circle, rgba(219, 234, 254, 0.25) 0%, transparent 70%);
+    top: 80%;
+    left: 30%;
+    animation-delay: 3.8s;
+  }
+
+  .bg-decoration-20 {
+    width: 55px;
+    height: 55px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.35) 0%, transparent 70%);
+    top: 25%;
+    right: 45%;
+    animation-delay: 6.2s;
+  }
+
+  /* Enhanced geometric floating shapes with more variety */
+  .floating-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 52px solid rgba(59, 130, 246, 0.12);
+    animation: floatTriangle 10s ease-in-out infinite;
+    top: 20%;
+    left: 75%;
+  }
+
+  .floating-triangle-2 {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid rgba(96, 165, 250, 0.15);
+    animation: floatTriangle 8s ease-in-out infinite;
+    top: 60%;
+    right: 10%;
+    animation-delay: 2s;
+  }
+
+  .floating-triangle-3 {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 43px solid rgba(147, 197, 253, 0.1);
+    animation: floatTriangle 11s ease-in-out infinite;
+    bottom: 15%;
+    right: 75%;
+    animation-delay: 4s;
+  }
+
+  .floating-square {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background: rgba(147, 197, 253, 0.12);
+    transform: rotate(45deg);
+    animation: floatSquare 7s ease-in-out infinite;
+    top: 75%;
+    right: 15%;
+  }
+
+  .floating-square-2 {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: rgba(30, 64, 175, 0.1);
+    transform: rotate(45deg);
+    animation: floatSquare 9s ease-in-out infinite;
+    top: 30%;
+    left: 10%;
+    animation-delay: 3s;
+  }
+
+  .floating-circle {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border: 2px solid rgba(59, 130, 246, 0.15);
+    border-radius: 50%;
+    animation: floatCircle 6s ease-in-out infinite;
+    top: 45%;
+    right: 70%;
+  }
+
+  .floating-circle-2 {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border: 3px solid rgba(30, 64, 175, 0.12);
+    border-radius: 50%;
+    animation: floatCircle 7s ease-in-out infinite;
+    top: 65%;
+    left: 85%;
+    animation-delay: 2.5s;
+  }
+
+  .floating-hexagon {
+    position: absolute;
+    width: 70px;
+    height: 40.41px;
+    background: rgba(96, 165, 250, 0.12);
+    margin: 20.21px 0;
+    animation: floatHexagon 12s ease-in-out infinite;
+    top: 10%;
+    right: 35%;
+  }
+
+  .floating-hexagon:before,
+  .floating-hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+  }
+
+  .floating-hexagon:before {
+    bottom: 100%;
+    border-bottom: 20.21px solid rgba(96, 165, 250, 0.12);
+  }
+
+  .floating-hexagon:after {
+    top: 100%;
+    border-top: 20.21px solid rgba(96, 165, 250, 0.12);
+  }
+
+  .floating-diamond {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(147, 197, 253, 0.1);
+    transform: rotate(45deg);
+    animation: floatDiamond 8s ease-in-out infinite;
+    bottom: 25%;
+    left: 80%;
+  }
+
+  .floating-diamond-2 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: rgba(59, 130, 246, 0.08);
+    transform: rotate(45deg);
+    animation: floatDiamond 9s ease-in-out infinite;
+    top: 5%;
+    left: 65%;
+    animation-delay: 1.8s;
+  }
+
+  .floating-star {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 11px solid rgba(96, 165, 250, 0.12);
+    transform: rotate(35deg);
+    animation: floatStar 10s ease-in-out infinite;
+    top: 35%;
+    left: 85%;
+  }
+
+  .floating-star-2 {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 9px solid rgba(147, 197, 253, 0.15);
+    transform: rotate(35deg);
+    animation: floatStar 13s ease-in-out infinite;
+    bottom: 45%;
+    right: 85%;
+    animation-delay: 5.2s;
+  }
+
+  .floating-star:before {
+    content: "";
+    position: absolute;
+    left: -15px;
+    top: -8px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 11px solid rgba(96, 165, 250, 0.12);
+    transform: rotate(-70deg);
+  }
+
+  .floating-star-2:before {
+    content: "";
+    position: absolute;
+    left: -12px;
+    top: -6px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 9px solid rgba(147, 197, 253, 0.15);
+    transform: rotate(-70deg);
+  }
+
+  .floating-star:after {
+    content: "";
+    position: absolute;
+    left: -15px;
+    top: 3px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 11px solid rgba(96, 165, 250, 0.12);
+    transform: rotate(70deg);
+  }
+
+  .floating-star-2:after {
+    content: "";
+    position: absolute;
+    left: -12px;
+    top: 2px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 9px solid rgba(147, 197, 253, 0.15);
+    transform: rotate(70deg);
+  }
+
+  /* Floating geometric shapes */
+  .floating-shape {
+    animation: floatShape 5s ease-in-out infinite;
+  }
+
+  /* Keep form elements with neutral colors, not affected by background */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  .input-glow:focus {
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4), 0 0 25px rgba(59, 130, 246, 0.15);
+  }
+
+  .btn-hover-effect:hover {
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-25px) rotate(8deg);
+    }
+  }
+
+  @keyframes floatShape {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-12px) rotate(120deg);
+    }
+    66% {
+      transform: translateY(8px) rotate(240deg);
+    }
+  }
+
+  @keyframes floatTriangle {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-18px) rotate(180deg);
+    }
+  }
+
+  @keyframes floatSquare {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(45deg);
+    }
+    50% {
+      transform: translateY(-22px) rotate(225deg);
+    }
+  }
+
+  @keyframes floatHexagon {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-15px) rotate(120deg);
+    }
+    66% {
+      transform: translateY(10px) rotate(240deg);
+    }
+  }
+
+  /* Added new animation keyframes for additional shapes */
+  @keyframes floatCircle {
+    0%,
+    100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-20px) scale(1.1);
+    }
+  }
+
+  @keyframes floatDiamond {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(45deg);
+    }
+    50% {
+      transform: translateY(-16px) rotate(135deg);
+    }
+  }
+
+  @keyframes floatStar {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(35deg);
+    }
+    50% {
+      transform: translateY(-14px) rotate(215deg);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+    }
   }
 }

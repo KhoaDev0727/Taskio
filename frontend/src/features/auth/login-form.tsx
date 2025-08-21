@@ -1,32 +1,52 @@
 "use client"
-
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react"
+import { API_BASE_URL } from "@/config"
 
 interface LoginFormProps {
   onSwitchToRegister: () => void
+  router: any // Type chính xác hơn là ReturnType<typeof useRouter>, nhưng tạm thời dùng any để đơn giản
 }
 
-export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
+export default function LoginForm({ onSwitchToRegister, router }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    setError(null)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
 
-    console.log("Login attempt:", { email, password })
-    setIsLoading(false)
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || "Đăng nhập thất bại. Vui lòng kiểm tra email và mật khẩu.")
+      }
+
+      const data = await response.json()
+      localStorage.setItem("accessToken", data.accessToken)
+      localStorage.setItem("refreshToken", data.refreshToken)
+      router.push("/dashboard")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Đã xảy ra lỗi. Vui lòng thử lại.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -35,7 +55,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         <h2 className="text-2xl font-bold text-white mb-3 drop-shadow-lg">Chào mừng trở lại</h2>
         <p className="text-white/70 drop-shadow-sm">Đăng nhập để tiếp tục quản lý công việc</p>
       </div>
-
+      {error && <p className="text-red-500 text-center">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <Label htmlFor="email" className="text-white/90 text-sm font-medium drop-shadow-sm">
@@ -54,7 +74,6 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             />
           </div>
         </div>
-
         <div className="space-y-2">
           <Label htmlFor="password" className="text-white/90 text-sm font-medium drop-shadow-sm">
             Mật khẩu
@@ -79,7 +98,6 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             </button>
           </div>
         </div>
-
         <div className="flex items-center justify-between">
           <label className="flex items-center space-x-3 cursor-pointer group">
             <input
@@ -97,7 +115,6 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             Quên mật khẩu?
           </button>
         </div>
-
         <Button
           type="submit"
           className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-xl btn-hover-effect transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg drop-shadow-md"
@@ -116,7 +133,6 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
           )}
         </Button>
       </form>
-
       <div className="text-center pt-4 border-t border-white/10">
         <p className="text-white/70 drop-shadow-sm">
           Chưa có tài khoản?{" "}

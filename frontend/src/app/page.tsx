@@ -1,4 +1,4 @@
-import AuthContainer from "@/components/auth-container"
+import AuthContainer from "@/features/auth/auth-container"
 
 export default function HomePage() {
   return (

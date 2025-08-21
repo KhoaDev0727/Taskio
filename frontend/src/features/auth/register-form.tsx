@@ -1,18 +1,19 @@
 "use client"
-
 import type React from "react"
-
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Mail, Lock, User, Building, ArrowRight, Check } from "lucide-react"
+import { API_BASE_URL } from "@/config"
 
 interface RegisterFormProps {
   onSwitchToLogin: () => void
+  router: any
 }
 
-export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
+export default function RegisterForm({ onSwitchToLogin, router }: RegisterFormProps) {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [formData, setFormData] = useState({
@@ -23,20 +24,51 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
     confirmPassword: "",
   })
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    setError(null)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    if (formData.password !== formData.confirmPassword) {
+      setError("Mật khẩu xác nhận không khớp.")
+      setIsLoading(false)
+      return
+    }
 
-    console.log("Register attempt:", formData)
-    setIsLoading(false)
-  }
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          tenant: formData.organization,
+        }),
+      })
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || "Đăng ký thất bại. Vui lòng kiểm tra thông tin.")
+      }
+
+      const data = await response.json()
+      localStorage.setItem("accessToken", data.accessToken)
+      localStorage.setItem("refreshToken", data.refreshToken)
+      router.push("/dashboard")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Đã xảy ra lỗi. Vui lòng thử lại.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -45,7 +77,7 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
         <h2 className="text-2xl font-bold text-white mb-3 drop-shadow-lg">Tạo tài khoản mới</h2>
         <p className="text-white/70 drop-shadow-sm">Bắt đầu hành trình quản lý công việc hiệu quả</p>
       </div>
-
+      {error && <p className="text-red-500 text-center">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid grid-cols-1 gap-5">
           <div className="space-y-2">
@@ -65,7 +97,6 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
               />
             </div>
           </div>
-
           <div className="space-y-2">
             <Label htmlFor="email" className="text-white/90 text-sm font-medium drop-shadow-sm">
               Địa chỉ email
@@ -83,7 +114,6 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
               />
             </div>
           </div>
-
           <div className="space-y-2">
             <Label htmlFor="organization" className="text-white/90 text-sm font-medium drop-shadow-sm">
               Tổ chức
@@ -101,7 +131,6 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
               />
             </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="password" className="text-white/90 text-sm font-medium drop-shadow-sm">
@@ -127,7 +156,6 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
                 </button>
               </div>
             </div>
-
             <div className="space-y-2">
               <Label htmlFor="confirmPassword" className="text-white/90 text-sm font-medium drop-shadow-sm">
                 Xác nhận mật khẩu
@@ -154,7 +182,6 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
             </div>
           </div>
         </div>
-
         <div className="flex items-start space-x-3 p-4 bg-white/5 rounded-xl border border-white/10">
           <input
             type="checkbox"
@@ -179,7 +206,6 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
             </button>
           </label>
         </div>
-
         <Button
           type="submit"
           className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-xl btn-hover-effect transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg drop-shadow-md"
@@ -199,7 +225,6 @@ export default function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
           )}
         </Button>
       </form>
-
       <div className="text-center pt-4 border-t border-white/10">
         <p className="text-white/70 drop-shadow-sm">
           Đã có tài khoản?{" "}
