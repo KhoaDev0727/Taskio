@@ -1,44 +1,40 @@
-"use client"
-import type React from "react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Eye, EyeOff, Mail, Lock, User, Building, ArrowRight, Check } from "lucide-react"
-import { API_BASE_URL } from "@/config"
+"use client";
+import type React from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Eye, EyeOff, Mail, Lock, User, Building, ArrowRight, Check } from "lucide-react";
+import { API_BASE_URL } from "@/config";
 
-interface RegisterFormProps {
-  onSwitchToLogin: () => void
-  router: any
-}
-
-export default function RegisterForm({ onSwitchToLogin, router }: RegisterFormProps) {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+export default function RegisterForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     organization: "",
     password: "",
     confirmPassword: "",
-  })
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Mật khẩu xác nhận không khớp.")
-      setIsLoading(false)
-      return
+      setError("Mật khẩu xác nhận không khớp.");
+      setIsLoading(false);
+      return;
     }
 
     try {
@@ -53,23 +49,23 @@ export default function RegisterForm({ onSwitchToLogin, router }: RegisterFormPr
           password: formData.password,
           tenant: formData.organization,
         }),
-      })
+      });
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || "Đăng ký thất bại. Vui lòng kiểm tra thông tin.")
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Đăng ký thất bại. Vui lòng kiểm tra thông tin.");
       }
 
-      const data = await response.json()
-      localStorage.setItem("accessToken", data.accessToken)
-      localStorage.setItem("refreshToken", data.refreshToken)
-      router.push("/dashboard")
+      const data = await response.json();
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      router.push("/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Đã xảy ra lỗi. Vui lòng thử lại.")
+      setError(err instanceof Error ? err.message : "Đã xảy ra lỗi. Vui lòng thử lại.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="space-y-8">
@@ -229,7 +225,7 @@ export default function RegisterForm({ onSwitchToLogin, router }: RegisterFormPr
         <p className="text-white/70 drop-shadow-sm">
           Đã có tài khoản?{" "}
           <button
-            onClick={onSwitchToLogin}
+            onClick={() => router.push("/auth/login")}
             className="text-blue-400 hover:text-blue-300 font-semibold transition-colors hover:underline drop-shadow-sm"
           >
             Đăng nhập ngay
@@ -237,5 +233,5 @@ export default function RegisterForm({ onSwitchToLogin, router }: RegisterFormPr
         </p>
       </div>
     </div>
-  )
+  );
 }

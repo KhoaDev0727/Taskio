@@ -1,28 +1,25 @@
-"use client"
-import type React from "react"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react"
-import { API_BASE_URL } from "@/config"
+"use client";
+import type React from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
+import { API_BASE_URL } from "@/config";
 
-interface LoginFormProps {
-  onSwitchToRegister: () => void
-  router: any // Type chính xác hơn là ReturnType<typeof useRouter>, nhưng tạm thời dùng any để đơn giản
-}
-
-export default function LoginForm({ onSwitchToRegister, router }: LoginFormProps) {
-  const [showPassword, setShowPassword] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+export default function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
     try {
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -31,23 +28,23 @@ export default function LoginForm({ onSwitchToRegister, router }: LoginFormProps
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      })
+      });
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || "Đăng nhập thất bại. Vui lòng kiểm tra email và mật khẩu.")
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Đăng nhập thất bại. Vui lòng kiểm tra email và mật khẩu.");
       }
 
-      const data = await response.json()
-      localStorage.setItem("accessToken", data.accessToken)
-      localStorage.setItem("refreshToken", data.refreshToken)
-      router.push("/dashboard")
+      const data = await response.json();
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      router.push("/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Đã xảy ra lỗi. Vui lòng thử lại.")
+      setError(err instanceof Error ? err.message : "Đã xảy ra lỗi. Vui lòng thử lại.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="space-y-8">
@@ -137,7 +134,7 @@ export default function LoginForm({ onSwitchToRegister, router }: LoginFormProps
         <p className="text-white/70 drop-shadow-sm">
           Chưa có tài khoản?{" "}
           <button
-            onClick={onSwitchToRegister}
+            onClick={() => router.push("/auth/register")}
             className="text-white hover:text-white/80 font-semibold transition-colors hover:underline drop-shadow-sm"
           >
             Đăng ký
@@ -145,5 +142,5 @@ export default function LoginForm({ onSwitchToRegister, router }: LoginFormProps
         </p>
       </div>
     </div>
-  )
+  );
 }

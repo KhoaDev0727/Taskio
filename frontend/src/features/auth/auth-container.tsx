@@ -1,18 +1,20 @@
-"use client"
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import LoginForm from "./login-form";
+import RegisterForm from "./register-form";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import LoginForm from "./login-form"
-import RegisterForm from "./register-form"
+interface AuthContainerProps {
+  initialForm?: "login" | "register";
+}
 
-export default function AuthContainer() {
-  const [isLogin, setIsLogin] = useState(true)
-  const router = useRouter()
+export default function AuthContainer({ initialForm = "login" }: AuthContainerProps) {
+  const [isLogin, setIsLogin] = useState(initialForm === "login");
+  const router = useRouter();
 
   return (
     <div className="min-h-screen relative overflow-hidden">
       <div className="absolute inset-0 gradient-bg"></div>
-
       <div className="bg-decoration bg-decoration-1"></div>
       <div className="bg-decoration bg-decoration-2"></div>
       <div className="bg-decoration bg-decoration-3"></div>
@@ -23,30 +25,11 @@ export default function AuthContainer() {
       <div className="bg-decoration bg-decoration-8"></div>
       <div className="bg-decoration bg-decoration-9"></div>
       <div className="bg-decoration bg-decoration-10"></div>
-      <div className="bg-decoration bg-decoration-11"></div>
-      <div className="bg-decoration bg-decoration-12"></div>
-      <div className="bg-decoration bg-decoration-13"></div>
-      <div className="bg-decoration bg-decoration-14"></div>
-      <div className="bg-decoration bg-decoration-15"></div>
-      <div className="bg-decoration bg-decoration-16"></div>
-      <div className="bg-decoration bg-decoration-17"></div>
-      <div className="bg-decoration bg-decoration-18"></div>
-      <div className="bg-decoration bg-decoration-19"></div>
-      <div className="bg-decoration bg-decoration-20"></div>
-
       <div className="floating-triangle"></div>
-      <div className="floating-triangle-2"></div>
-      <div className="floating-triangle-3"></div>
       <div className="floating-square"></div>
-      <div className="floating-square-2"></div>
-      <div className="floating-hexagon"></div>
       <div className="floating-circle"></div>
-      <div className="floating-circle-2"></div>
       <div className="floating-diamond"></div>
-      <div className="floating-diamond-2"></div>
       <div className="floating-star"></div>
-      <div className="floating-star-2"></div>
-
       <div className="absolute top-20 left-10 w-8 h-8 border-2 border-blue-200/30 rotate-45 floating-shape"></div>
       <div
         className="absolute top-40 right-20 w-6 h-6 bg-blue-100/20 rounded-full floating-shape"
@@ -72,80 +55,6 @@ export default function AuthContainer() {
         className="absolute top-16 right-1/3 w-7 h-7 border-2 border-white/20 rounded-full floating-shape"
         style={{ animationDelay: "1.5s" }}
       ></div>
-      <div
-        className="absolute bottom-20 left-16 w-5 h-5 bg-blue-200/25 rotate-45 floating-shape"
-        style={{ animationDelay: "2.5s" }}
-      ></div>
-      <div
-        className="absolute top-1/2 left-20 w-3 h-3 border border-white/30 rotate-12 floating-shape"
-        style={{ animationDelay: "3.5s" }}
-      ></div>
-      <div
-        className="absolute bottom-1/3 right-20 w-6 h-6 bg-white/10 rounded-full floating-shape"
-        style={{ animationDelay: "4.5s" }}
-      ></div>
-      <div
-        className="absolute top-5/6 left-1/6 w-4 h-4 border-2 border-blue-300/35 floating-shape"
-        style={{ animationDelay: "0.5s" }}
-      ></div>
-      <div
-        className="absolute top-10 left-1/2 w-2 h-2 bg-blue-100/40 floating-shape"
-        style={{ animationDelay: "6s" }}
-      ></div>
-      <div
-        className="absolute bottom-10 right-1/2 w-8 h-8 border border-white/25 rotate-45 floating-shape"
-        style={{ animationDelay: "1.8s" }}
-      ></div>
-      <div
-        className="absolute top-1/4 right-10 w-3 h-3 bg-blue-200/30 rounded-full floating-shape"
-        style={{ animationDelay: "3.2s" }}
-      ></div>
-      <div
-        className="absolute bottom-1/2 left-10 w-5 h-5 border-2 border-blue-100/20 rotate-12 floating-shape"
-        style={{ animationDelay: "4.8s" }}
-      ></div>
-      <div
-        className="absolute top-5/6 left-1/6 w-6 h-6 border border-white/35 rotate-45 floating-shape"
-        style={{ animationDelay: "11s" }}
-      ></div>
-      <div
-        className="absolute top-4/5 right-3/4 w-7 h-7 bg-blue-100/25 rounded-full floating-shape"
-        style={{ animationDelay: "10s" }}
-      ></div>
-
-      <div
-        className="absolute top-12 left-1/5 w-10 h-10 border-3 border-blue-200/25 rounded-full floating-shape"
-        style={{ animationDelay: "7s" }}
-      ></div>
-      <div
-        className="absolute bottom-16 right-1/5 w-7 h-7 bg-white/20 rotate-45 floating-shape"
-        style={{ animationDelay: "8s" }}
-      ></div>
-      <div
-        className="absolute top-1/6 right-2/3 w-5 h-5 border-2 border-blue-300/30 rotate-12 floating-shape"
-        style={{ animationDelay: "9s" }}
-      ></div>
-      <div
-        className="absolute bottom-1/6 left-2/3 w-8 h-8 bg-blue-100/15 rounded-full floating-shape"
-        style={{ animationDelay: "10s" }}
-      ></div>
-      <div
-        className="absolute top-5/6 left-1/6 w-6 h-6 border border-white/35 rotate-45 floating-shape"
-        style={{ animationDelay: "11s" }}
-      ></div>
-      <div
-        className="absolute top-2/5 right-1/6 w-4 h-4 bg-blue-200/25 floating-shape"
-        style={{ animationDelay: "12s" }}
-      ></div>
-      <div
-        className="absolute bottom-2/5 left-1/8 w-9 h-9 border-2 border-blue-100/20 rounded-full floating-shape"
-        style={{ animationDelay: "13s" }}
-      ></div>
-      <div
-        className="absolute top-3/5 right-1/8 w-3 h-3 bg-white/25 rotate-12 floating-shape"
-        style={{ animationDelay: "14s" }}
-      ></div>
-
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
           <div className="order-2 lg:order-1 flex justify-center lg:justify-end">
@@ -157,13 +66,11 @@ export default function AuthContainer() {
                   <RegisterForm onSwitchToLogin={() => setIsLogin(true)} router={router} />
                 )}
               </div>
-
               <div className="text-center mt-8 auth-fade-in">
                 <p className="text-white/60 text-sm">© 2024 Taskio. Tất cả quyền được bảo lưu.</p>
               </div>
             </div>
           </div>
-
           <div className="order-1 lg:order-2 text-center lg:text-left flex flex-col justify-center lg:pl-8">
             <div className="auth-fade-in">
               <div className="inline-flex items-center justify-center w-24 h-24 bg-white/10 backdrop-blur-md rounded-3xl mb-8 pulse-glow border border-white/20">
@@ -186,13 +93,12 @@ export default function AuthContainer() {
                 Quản lý công việc đa tổ chức thông minh
               </p>
               <p className="text-white/80 text-lg max-w-lg drop-shadow-md">
-                Nền tảng SaaS hiện đại giúp bạn quản lý công việc hiệu quả với giao diện trực quan và tính năng đa tổ
-                chức mạnh mẽ.
+                Nền tảng SaaS hiện đại giúp bạn quản lý công việc hiệu quả với giao diện trực quan và tính năng đa tổ chức mạnh mẽ.
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

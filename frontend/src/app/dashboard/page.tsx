@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -8,7 +7,6 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
-import '../styles/globals.css'
 import {
   BarChart3,
   Calendar,
@@ -103,23 +101,20 @@ const priorityColors = {
   urgent: "bg-red-100 text-red-600",
 }
 
-export default function dashboard() {
+export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState("overview")
   const [searchQuery, setSearchQuery] = useState("")
-
   const filteredTasks = mockTasks.filter(
     (task) =>
       task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       task.description.toLowerCase().includes(searchQuery.toLowerCase()),
   )
-
   const tasksByStatus = {
     todo: filteredTasks.filter((t) => t.status === "todo"),
     "in-progress": filteredTasks.filter((t) => t.status === "in-progress"),
     review: filteredTasks.filter((t) => t.status === "review"),
     done: filteredTasks.filter((t) => t.status === "done"),
   }
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -147,7 +142,6 @@ export default function dashboard() {
               </Button>
             </nav>
           </div>
-
           <div className="flex items-center gap-4">
             <div className="relative hidden md:block">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
@@ -170,7 +164,6 @@ export default function dashboard() {
           </div>
         </div>
       </header>
-
       <div className="flex">
         {/* Sidebar */}
         <aside className="w-64 border-r border-border bg-sidebar min-h-[calc(100vh-4rem)] p-4">
@@ -199,7 +192,6 @@ export default function dashboard() {
                 </Button>
               </div>
             </div>
-
             <div>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-sm font-semibold text-sidebar-foreground">Projects</h3>
@@ -224,7 +216,6 @@ export default function dashboard() {
             </div>
           </div>
         </aside>
-
         {/* Main Content */}
         <main className="flex-1 p-6">
           <div className="max-w-7xl mx-auto space-y-6">
@@ -245,7 +236,6 @@ export default function dashboard() {
                 </Button>
               </div>
             </div>
-
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="border-border">
@@ -260,7 +250,6 @@ export default function dashboard() {
                   </p>
                 </CardContent>
               </Card>
-
               <Card className="border-border">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-card-foreground">Completed</CardTitle>
@@ -273,7 +262,6 @@ export default function dashboard() {
                   </p>
                 </CardContent>
               </Card>
-
               <Card className="border-border">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-card-foreground">In Progress</CardTitle>
@@ -286,7 +274,6 @@ export default function dashboard() {
                   </p>
                 </CardContent>
               </Card>
-
               <Card className="border-border">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-card-foreground">Team Members</CardTitle>
@@ -300,7 +287,6 @@ export default function dashboard() {
                 </CardContent>
               </Card>
             </div>
-
             {/* Main Dashboard Content */}
             <Tabs value={selectedTab} onValueChange={setSelectedTab} className="space-y-6">
               <TabsList className="grid w-full grid-cols-3 lg:w-[400px]">
@@ -308,7 +294,6 @@ export default function dashboard() {
                 <TabsTrigger value="kanban">Kanban Board</TabsTrigger>
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
               </TabsList>
-
               <TabsContent value="overview" className="space-y-6">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {/* Recent Tasks */}
@@ -344,7 +329,6 @@ export default function dashboard() {
                       ))}
                     </CardContent>
                   </Card>
-
                   {/* Team Activity */}
                   <Card className="border-border">
                     <CardHeader>
@@ -363,7 +347,6 @@ export default function dashboard() {
                           <p className="text-xs text-muted-foreground">2 hours ago</p>
                         </div>
                       </div>
-
                       <div className="flex items-start gap-3">
                         <Avatar className="w-6 h-6">
                           <AvatarFallback className="bg-chart-2 text-white text-xs">TB</AvatarFallback>
@@ -375,7 +358,6 @@ export default function dashboard() {
                           <p className="text-xs text-muted-foreground">4 hours ago</p>
                         </div>
                       </div>
-
                       <div className="flex items-start gap-3">
                         <Avatar className="w-6 h-6">
                           <AvatarFallback className="bg-chart-3 text-white text-xs">LC</AvatarFallback>
@@ -390,7 +372,6 @@ export default function dashboard() {
                     </CardContent>
                   </Card>
                 </div>
-
                 {/* Project Progress */}
                 <Card className="border-border">
                   <CardHeader>
@@ -407,7 +388,6 @@ export default function dashboard() {
                         <Progress value={75} className="h-2" />
                         <p className="text-xs text-muted-foreground">12/16 tasks completed</p>
                       </div>
-
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <h4 className="font-medium text-card-foreground">Taskio API</h4>
@@ -416,7 +396,6 @@ export default function dashboard() {
                         <Progress value={60} className="h-2" />
                         <p className="text-xs text-muted-foreground">9/15 tasks completed</p>
                       </div>
-
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <h4 className="font-medium text-card-foreground">Taskio Core</h4>
@@ -429,7 +408,6 @@ export default function dashboard() {
                   </CardContent>
                 </Card>
               </TabsContent>
-
               <TabsContent value="kanban" className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {/* To Do Column */}
@@ -478,7 +456,6 @@ export default function dashboard() {
                       ))}
                     </CardContent>
                   </Card>
-
                   {/* In Progress Column */}
                   <Card className="border-border">
                     <CardHeader className="pb-3">
@@ -525,7 +502,6 @@ export default function dashboard() {
                       ))}
                     </CardContent>
                   </Card>
-
                   {/* Review Column */}
                   <Card className="border-border">
                     <CardHeader className="pb-3">
@@ -572,7 +548,6 @@ export default function dashboard() {
                       ))}
                     </CardContent>
                   </Card>
-
                   {/* Done Column */}
                   <Card className="border-border">
                     <CardHeader className="pb-3">
@@ -623,7 +598,6 @@ export default function dashboard() {
                   </Card>
                 </div>
               </TabsContent>
-
               <TabsContent value="analytics" className="space-y-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <Card className="border-border">
@@ -640,7 +614,6 @@ export default function dashboard() {
                       </div>
                     </CardContent>
                   </Card>
-
                   <Card className="border-border">
                     <CardHeader>
                       <CardTitle className="text-card-foreground">Team Performance</CardTitle>
@@ -663,7 +636,6 @@ export default function dashboard() {
                             <p className="text-sm text-chart-4">+2 this week</p>
                           </div>
                         </div>
-
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <Avatar className="w-8 h-8">
@@ -679,7 +651,6 @@ export default function dashboard() {
                             <p className="text-sm text-chart-4">+1 this week</p>
                           </div>
                         </div>
-
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <Avatar className="w-8 h-8">
@@ -699,7 +670,6 @@ export default function dashboard() {
                     </CardContent>
                   </Card>
                 </div>
-
                 <Card className="border-border">
                   <CardHeader>
                     <CardTitle className="text-card-foreground">Project Timeline</CardTitle>
@@ -715,7 +685,6 @@ export default function dashboard() {
                           <Progress value={75} className="h-2" />
                         </div>
                       </div>
-
                       <div className="flex items-start gap-4">
                         <div className="w-3 h-3 bg-chart-2 rounded-full mt-2"></div>
                         <div className="flex-1">
@@ -724,7 +693,6 @@ export default function dashboard() {
                           <Progress value={60} className="h-2" />
                         </div>
                       </div>
-
                       <div className="flex items-start gap-4">
                         <div className="w-3 h-3 bg-chart-3 rounded-full mt-2"></div>
                         <div className="flex-1">
